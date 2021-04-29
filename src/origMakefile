@@ -1,0 +1,45 @@
+# Kraken/Jaguar
+#CC = cc
+#FC=ftn
+#LD = cc
+#AR=ar
+
+# Ranger
+#CC = mpicc
+#FC=mpif77
+#LD = mpicc
+#AR=ar
+
+# HPCC
+#CC = mpicc
+#FC=gfortran
+#LD = mpicc
+#AR=ar
+
+# Shock
+CC=gcc
+FC=gfortran
+LD=gcc
+AR=ar
+
+FFLAGS = -Wall -O3 -ffixed-line-length-132 -finit-local-zero -static
+
+TARGETS = wfcvm wfcvm_txt libwfcvm.a
+all: ${TARGETS}
+
+
+wfcvm: wf_cvm3c.f
+	${FC} ${FFLAGS} $^ -o $@
+
+wfcvm_txt: wfcvm_main.f  wfcvm_sub.o wfcvm_txt.f
+	${FC} ${FFLAGS} $^ -o $@
+
+libwfcvm.a: wfcvm_sub.o
+	$(AR) rcs $@ $^
+	cp $@ ../lib
+	cp wfcvm.h ../include
+
+
+clean:
+	rm -rf *.o *~ wfcvm ${TARGETS} ../lib/libwfcvm.a ../include/wfcvm.h
+
