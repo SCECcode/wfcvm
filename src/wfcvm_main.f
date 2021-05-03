@@ -10,6 +10,14 @@ c
          modelpath= TRIM('.')//achar(0)
          ecode = 0
 
+c--display version-------------------------------------
+         call cvms_version(version, ecode)
+         if(ecode.ne.0)then
+            write(*,*)' error retrieving version '
+            goto 98
+         endif
+         write( 0, * )'SCEC WFCVM ',version
+
 c--read points of interest file-------------------------
          call readpts(kerr)
          if(kerr.ne.0)then

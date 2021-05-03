@@ -47,7 +47,18 @@ c        write(*,*) ' done with wfreadsoil'
          return
          end
 
+c Null terminated version id.
+c The 'str' argument must be 64 bytes in size
+         subroutine cvms_version(str, ecode)
+         character(64) str
 
+         include 'version.h'
+         str=TRIM(versionid)//achar(0)
+         ecode=0
+         return
+         end
+            
+c WFCVM Query
          subroutine wfcvm_query(nn,rlon,rlat,rdep,alpha,beta,rho,ecode)
          dimension rlon(nn),rlat(nn),rdep(nn),alpha(nn),beta(nn),rho(nn)
 
