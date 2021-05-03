@@ -49,7 +49,7 @@ c        write(*,*) ' done with wfreadsoil'
 
 c Null terminated version id.
 c The 'str' argument must be 64 bytes in size
-         subroutine cvms_version(str, ecode)
+         subroutine wfcvm_version(str, ecode)
          character(64) str
 
          include 'version.h'
