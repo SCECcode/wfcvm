@@ -11,7 +11,7 @@ c
          ecode = 0
 
 c--display version-------------------------------------
-         call cvms_version(version, ecode)
+         call wfcvm_version(version, ecode)
          if(ecode.ne.0)then
             write(*,*)' error retrieving version '
             goto 98
