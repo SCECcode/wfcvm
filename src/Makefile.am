@@ -34,7 +34,7 @@ install: all
 	cp libwfcvm.a ${libdir}
 	cp libwfcvm.so ${libdir}
 	cp wfcvm.h ${includedir}
-	find ./* -maxdepth 0 ! -name libwfcvm.a ! -name '*.f' ! -name '*.o' ! -name 'Makefile*' ! -exec cp '{}' '${prefix}/src' \;
+	find ./* -maxdepth 0 ! -name 'libwfcvm.*' ! -name '*.h' ! -name 'test*' ! -name 'wfcvm' ! -name '*.f' ! -name '*.o' ! -name 'Makefile*' ! -exec cp '{}' '${prefix}/src' \;
 
 clean:
 	rm -rf *.o *~ wfcvm_txt *.a

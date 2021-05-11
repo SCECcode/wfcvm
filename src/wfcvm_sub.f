@@ -1,3 +1,5 @@
+c-- TWEAK to turn fname from 2021/05/15/bas6.xyz to ./base6xyz
+c--
          subroutine wfcvm_init(modeldir, ecode)
          character(128) modeldir
          character(128) rpath
@@ -433,12 +435,15 @@ c PES 2011/07/21
 
          include 'surface.h'
          character*4 asuf
+         character*2 pwd
          include 'names.h'
+         pwd='./'
          asuf='.xyz'
          kerr=0
 c---loop to read-------------------
          do 117 i=1,numsur
-          fname=rpath(1:loc1)//'/'//aedname(i)//asuf
+c-- TWEAK    fname=rpath(1:loc1)//'/'//aedname(i)//asuf
+         fname=pwd//aedname(i)//asuf
           open(16,file=fname,status='old',err=99)
            do 118 k=1,nlasur(i)
            do 118 j=1,nlosur(i)
@@ -463,10 +468,11 @@ c PES 2011/07/21
          common/filestuff/rpath,fname,loc1
 
          include 'borehole.h'
-         character fileib*10, isotyp2*6
+         character fileib*12, isotyp2*6
 c---file name assignment-----------
-         fileib='boreholes3'
-         fname=rpath(1:loc1)//'/'//fileib
+         fileib='./boreholes3'
+c-- TWEAK    fname=rpath(1:loc1)//'/'//fileib
+         fname=fileib
          kerr=0
          rmaxbh=0.
 c---read file----------------------
@@ -512,7 +518,8 @@ c PES 2011/07/21
          common /wfsuboi/inout(ibig)
 
          kerr=0
-         fname=rpath(1:loc1)//'/'//'reg_mod'
+c -- TWEAK  fname=rpath(1:loc1)//'/'//'reg_mod'
+         fname='./reg_mod'
          open(19,file=fname,status='old',err=2999)
          do 1119 k=1,nreglat
           do 1119 j=1,nreglon
@@ -545,8 +552,9 @@ c -- reads soil type info from a modified .pgm ascii file-
          include 'soil1.h'
          character*50 filesb
 c -- here's input file name
-         filesb='soil3.pgm'
-         fname=rpath(1:loc1)//'/'//filesb
+         filesb='./soil3.pgm'
+c -- TWEAK  fname=rpath(1:loc1)//'/'//filesb
+         fname=filesb
          kerr = 0
          open(16,file=fname,status='old',err=5977)
          read(16,*)rlonmax,rlonmin,rlatmax,rlatmin
@@ -799,10 +807,11 @@ c PES 2011/07/21
 
 c -- read generic borehole profiles--------------------
          include 'genpro.h'
-         character*16 fileig,ag1*50
+         character*18 fileig,ag1*50
 c -- assign file name----------------------------------
-         fileig='soil_generic4_lo'
-         fname=rpath(1:loc1)//'/'//fileig
+         fileig='./soil_generic4_lo'
+c -- TWEAK  fname=rpath(1:loc1)//'/'//fileig
+         fname=fileig
          kerr=0
 c -- read file-----------------------------------------
          open(12,file=fname,status='old',err=2977)
