@@ -1,4 +1,4 @@
-c-- TWEAK to turn fname from 2021/05/15/bas6.xyz to ./base6xyz
+c WFCVM init
 c--
          subroutine wfcvm_init(modeldir, ecode)
          character(128) modeldir
@@ -23,7 +23,6 @@ c--read borehole data-----------------------------------
          write(*,*)' error with borehole file '
          go to 198
          endif  
-c        write(*,*) ' done with wfreadhole'
 c--read generic borehole profiles-----------------------
          call wfreadgene(kerr)
          if(kerr.eq.1)then
@@ -45,10 +44,11 @@ c--read soil types--------------------------------------
          go to 198
          endif
 c        write(*,*) ' done with wfreadsoil'
- 198     ecode=kerr
+198     ecode=kerr
          return
          end
 
+c WFCVM version
 c Null terminated version id.
 c The 'str' argument must be 64 bytes in size
          subroutine wfcvm_version(str, ecode)
@@ -59,14 +59,13 @@ c The 'str' argument must be 64 bytes in size
          ecode=0
          return
          end
-            
+
 c WFCVM Query
+c Wasatch Front CVM.
+c H. Magistrale 10/06
          subroutine wfcvm_query(nn,rlon,rlat,rdep,alpha,beta,rho,ecode)
          dimension rlon(nn),rlat(nn),rdep(nn),alpha(nn),beta(nn),rho(nn)
 
-c Wasatch Front CVM.
-c H. Magistrale 10/06
-c
          include 'params.h'
          include 'surface.h'
          include 'surfaced.h'
@@ -90,7 +89,7 @@ c PES 2011/07/21 check that nn is less than ibig
         ecode = 1
         goto 98
       endif
-  
+
 c PES 2011/07/021 convert depth meters to feet
       do i = 1, nn
         rdep(i) = rdep(i) * 3.2808399
@@ -182,7 +181,7 @@ c   surfaced.f.  The rkall values for R2 and R3 were calibrated from
 c   sonic log data.  --JCP
 c
 c---assign rkall values---------------------------
-         call getkay(rlat(l0),rlon(l0),iup,rkall)
+         call getkay(rlat(l0),rlon(l0),iup,idn,rkall)
 c   here between surfaces
          if(iup.ne.0)then
            ra1=rage(iup)
@@ -211,9 +210,9 @@ c---scale sed age, constant, exponent-------------
          rk=(rscal*rk2)+((1.-rscal)*rk1)
          rfac=(rscal*rf2)+((1.-rscal)*rf1)
          rtdep=rdep(l0)
+         if(rtdep.eq.0.)rtdep=3.28084
 c---find alpha in ft/s from Faust relation--------
 c   The alpha (Vp) for points above R2 will be replaced later.  --JCP
-         if(rtdep.eq.0.)rtdep=3.28084
          alpha(l0)=rk*(rtdep**rfac)*(rtage**rfac)
 c---convert alpha to m/s--------------------------
          alpha(l0)=alpha(l0)*0.30480
@@ -338,7 +337,7 @@ c---between these two models.
 c---Tapering between models added by J.C. Pechmann, 10/6/2009
 980      continue
 c---if 4 km or above, use Vp sonic log gradient------
-c   that Vp profile is read in readgene as profile number 18
+c   that Vp profile is read in wfreadgene as profile number 18
 c   so called rvsgen, but really Vp
          if(rdep(l0).le.4000.*3.2808399)then
          do 9888 nx=2,numptge2(18)
@@ -421,29 +420,26 @@ c PES 2011/02/04 convert depth feet to back to meters
       do i = 1, nn
         rdep(i) = rdep(i) / 3.2808399
       end do
- 98      return
-         end
+98      return
+        end
+
 cccccccccccccccccccccccccccccccccccccccccccccccccccccc
          subroutine wfreadsurf(kerr)
 c---reads stratigraphic surfaces-------------------------
 c---reads ascii lon, lat, z --------------------------
-
 c PES 2011/07/21
          character(128) rpath
          character(180) fname
          common/filestuff/rpath,fname,loc1
 
          include 'surface.h'
-         character*4 asuf
-         character*2 pwd
+         character*8 aname, asuf*4
          include 'names.h'
-         pwd='./'
          asuf='.xyz'
          kerr=0
 c---loop to read-------------------
          do 117 i=1,numsur
-c-- TWEAK    fname=rpath(1:loc1)//'/'//aedname(i)//asuf
-         fname=pwd//aedname(i)//asuf
+          fname=rpath(1:loc1)//'/'//aedname(i)//asuf
           open(16,file=fname,status='old',err=99)
            do 118 k=1,nlasur(i)
            do 118 j=1,nlosur(i)
@@ -456,7 +452,7 @@ c---convert meters to feet----------
 117      continue
          go to 101
 99       kerr=1
-         write(*,*)' error reading file ', fname
+         write(*,*)' error reading surface file ', fname
 101      return
          end
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -468,11 +464,10 @@ c PES 2011/07/21
          common/filestuff/rpath,fname,loc1
 
          include 'borehole.h'
-         character fileib*12, isotyp2*6
+         character fileib*10, isotyp2*6
 c---file name assignment-----------
-         fileib='./boreholes3'
-c-- TWEAK    fname=rpath(1:loc1)//'/'//fileib
-         fname=fileib
+         fileib='boreholes3'
+         fname=rpath(1:loc1)//'/'//fileib
          kerr=0
          rmaxbh=0.
 c---read file----------------------
@@ -490,17 +485,19 @@ c---find deepest borehole-----------
           if(rbhdmx(j).gt.rmaxbh)rmaxbh=rbhdmx(j)
 c---read values---------------------
           do 8102 k=1, numptbh(j)
-          read(15,402)rdepbh(j,k),rvs(j,k)
+          read(15,402)rdepbh2(j,k),rdepbh(j,k),rvs(j,k)
 c---convert meters to feet----------
           rdepbh(j,k)=rdepbh(j,k)*3.28084
-402       format(t5,f5.0,1x,f7.1)
+          rdepbh2(j,k)=rdepbh2(j,k)*3.28084
+402       format(t1,f4.0,t5,f5.0,1x,f7.1)
 8102      continue
 8101     continue
          close(15)
-          go to 2915
-2978      kerr=1
-2915      return
-           end
+         go to 2915
+2978     kerr=1
+         write(*,*)' error reading borehole file ', fname
+2915     return
+         end
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
           subroutine wfreadreg(kerr)
 c -- read regional model info---------------------------
@@ -518,8 +515,7 @@ c PES 2011/07/21
          common /wfsuboi/inout(ibig)
 
          kerr=0
-c -- TWEAK  fname=rpath(1:loc1)//'/'//'reg_mod'
-         fname='./reg_mod'
+         fname=rpath(1:loc1)//'/'//'reg_mod'
          open(19,file=fname,status='old',err=2999)
          do 1119 k=1,nreglat
           do 1119 j=1,nreglon
@@ -538,24 +534,24 @@ c -- convert to m/s---------------------------------
 1818     format(f12.6,f12.6)
 1819     format(t40,f9.6)
 2999     kerr=1
+         write(*,*)' error reading regional file ', fname
 1901     return
          end
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
          subroutine wfreadsoil(kerr)
+c -- reads soil type info from a modified .pgm ascii file-
 
 c PES 2011/07/21
          character(128) rpath
          character(180) fname
          common/filestuff/rpath,fname,loc1
 
-c -- reads soil type info from a modified .pgm ascii file-
          include 'soil1.h'
          character*50 filesb
 c -- here's input file name
-         filesb='./soil3.pgm'
-c -- TWEAK  fname=rpath(1:loc1)//'/'//filesb
-         fname=filesb
-         kerr = 0
+         filesb='soil3.pgm'
+         fname=rpath(1:loc1)//'/'//filesb
+         kerr=0
          open(16,file=fname,status='old',err=5977)
          read(16,*)rlonmax,rlonmin,rlatmax,rlatmin
          read(16,*)nx,ny
@@ -568,6 +564,7 @@ c -- useful numbers
          rdelx=abs(rlonmax-rlonmin)/nx
          go to 5976
 5977     kerr=1
+         write(*,*)' error reading soil file ', fname
 5976     return
          end
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -807,11 +804,10 @@ c PES 2011/07/21
 
 c -- read generic borehole profiles--------------------
          include 'genpro.h'
-         character*18 fileig,ag1*50
+         character*16 fileig,ag1*50
 c -- assign file name----------------------------------
-         fileig='./soil_generic4_lo'
-c -- TWEAK  fname=rpath(1:loc1)//'/'//fileig
-         fname=fileig
+         fileig='soil_generic4_lo'
+         fname=rpath(1:loc1)//'/'//fileig
          kerr=0
 c -- read file-----------------------------------------
          open(12,file=fname,status='old',err=2977)
@@ -830,6 +826,7 @@ c -- skip label line, which follows data points--------
          close(12)
          go to 2976
 2977     kerr=1    
+         write(*,*)' error reading generic file ', fname
 2976     return
          end
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -896,7 +893,7 @@ c    iradctp = number of nearby boreholes with data
            k=iradbh(l,i)
             do 9669 n=1,numptbh(k)
 c -- check for data at this depth----------------------
-            if(rdep.le.rdepbh(k,n))then
+            if(rdep.lt.rdepbh(k,n).and.rdep.ge.rdepbh2(k,n))then
              rva=rvs(k,n)
             if(rva.ne.0.)then
 c -- this gives borehole within 50 m-------------------
@@ -1043,7 +1040,7 @@ c -- have only 1 borehole within 50 m, the deepest-----
             k=iradbh(2,1)
             do 96691 n=1,numptbh(k)
 c -- check for data at this depth----------------------
-            if(rdep.le.rdepbh(k,n))then
+            if(rdep.lt.rdepbh(k,n).and.rdep.ge.rdepbh2(k,n))then
              rva=rvs(k,n)
              rveln=rva
              go to 96711
@@ -1075,7 +1072,7 @@ c    iradctp = number of nearby boreholes with data
            k=iradbh(l,i)
             do 1669 n=1,numptbh(k)
 c -- check for data at this depth----------------------
-            if(rdep.le.rdepbh(k,n))then
+            if(rdep.lt.rdepbh(k,n).and.rdep.ge.rdepbh2(k,n))then
              rva=rvs(k,n)
             if(rva.ne.0.)then
 c -- this gives borehole within 50 m-------------------
@@ -1137,7 +1134,7 @@ c -- done---------------------------------------------
          return
          end
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-         subroutine getkay(rlat10,rlon10,iup,rkall)
+         subroutine getkay(rlat10,rlon10,iup,idn,rkall)
 c -- figure out which 'k' -----------------------------
 c
 c -- latitude screen to tell which basin 

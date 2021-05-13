@@ -24,11 +24,12 @@ AR=ar
 
 FFLAGS = -Wall -O3 -ffixed-line-length-132 -finit-local-zero -static
 
-TARGETS = wfcvm wfcvm_txt libwfcvm.a
+#TARGETS = wfcvm wfcvm_txt libwfcvm.a
+TARGETS = wfcvm 
 all: ${TARGETS}
 
 
-wfcvm: wf_cvm3c.f
+wfcvm: wf_cvm3d.f
 	${FC} ${FFLAGS} $^ -o $@
 
 wfcvm_txt: wfcvm_main.f  wfcvm_sub.o wfcvm_txt.f

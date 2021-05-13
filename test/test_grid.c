@@ -28,7 +28,7 @@ int test_wfcvm_txt()
   sprintf(reffile, "%s/%s", currentdir, "test-extract.ref");
 
   if (test_assert_int(run_wfcvm_txt("../src", infile, outfile), 0) != 0) {
-    printf("cvm_txt failure\n");
+    printf("wfcvm_txt failure\n");
     return(1);
   }
 

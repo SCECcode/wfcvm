@@ -27,14 +27,14 @@ int run_wfcvm_txt(const char *cvmdir, const char *infile, const char *outfile)
   } else if (pid == 0) {
     /* Change dir to cvmdir */
     if (chdir(cvmdir) != 0) {
-      printf("FAIL: Error changing dir in runfortran\n");
+      printf("FAIL: Error changing dir in run_wfcvm_txt\n");
       return(1);
     }
 
     execl( "./run_wfcvm_txt.sh", "./run_wfcvm_txt.sh", infile, outfile, 
 	   (char *)0);
     perror("execl"); /* shall never get to here */
-    printf("FAIL: CVM exited abnormally\n");
+    printf("FAIL: WFCVM exited abnormally\n");
     return(1);
   } else {
     int status;
@@ -42,7 +42,7 @@ int run_wfcvm_txt(const char *cvmdir, const char *infile, const char *outfile)
     if (WIFEXITED(status)) {
       return(0);
     } else {
-      printf("FAIL: CVM exited abnormally\n");
+      printf("FAIL: WFCVM exited abnormally\n");
       return(1);
     }
   }
