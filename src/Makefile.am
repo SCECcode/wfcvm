@@ -31,7 +31,6 @@ install: all
 	mkdir -p ${libdir}
 	mkdir -p ${includedir}
 	mkdir -p ${prefix}/src
-	chmod +r *
 	cp libwfcvm.a ${libdir}
 	cp libwfcvm.so ${libdir}
 	cp wfcvm.h ${includedir}
