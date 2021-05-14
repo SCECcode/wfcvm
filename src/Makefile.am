@@ -3,9 +3,9 @@ lib_LIBRARIES = libwfcvm.a
 bin_PROGRAMS = wfcvm_txt wfcvm
 
 # General compiler/linker flags
-AM_CFLAGS = ${CFLAGS}
+AM_CFLAGS = ${CFLAGS} 
 AM_LDFLAGS = ${LDFLAGS}
-AM_FCFLAGS = ${FCFLAGS}
+AM_FCFLAGS = ${FCFLAGS} -fPIC
 
 TARGETS = wfcvm wfcvm_txt libwfcvm.a libwfcvm.so
 
@@ -31,6 +31,7 @@ install: all
 	mkdir -p ${libdir}
 	mkdir -p ${includedir}
 	mkdir -p ${prefix}/src
+	chmod +r *
 	cp libwfcvm.a ${libdir}
 	cp libwfcvm.so ${libdir}
 	cp wfcvm.h ${includedir}
