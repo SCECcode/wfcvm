@@ -3,7 +3,7 @@ lib_LIBRARIES = libwfcvm.a
 bin_PROGRAMS = wfcvm_txt wfcvm
 
 # General compiler/linker flags
-AM_CFLAGS = ${CFLAGS} 
+AM_CFLAGS = ${CFLAGS} -fPIC 
 AM_LDFLAGS = ${LDFLAGS}
 AM_FCFLAGS = ${FCFLAGS} -fPIC
 
@@ -17,14 +17,21 @@ wfcvm: wf_cvm3d.f
 wfcvm_txt: wfcvm_main.f wfcvm_sub_local.f wfcvm_txt.f
 	$(FC) $(AM_FCFLAGS) $^ -o $@
 
-libwfcvm.a: wfcvm_sub.o
+libwfcvm.a: wfcvm_sub.o wfcvm_static.o
 	$(AR) rcs $@ $^
 
-libwfcvm.so: wfcvm_sub.o
+libwfcvm.so: wfcvm_sub.o wfcvm.o
 	$(FC) -shared $(AM_CFLAGS) -o libwfcvm.so $^
 
 wfcvm_sub.o: wfcvm_sub.f
 	$(FC) $(AM_FCFLAGS) -o $@ -c $^
+
+wfcvm.o: wfcvm.c
+	$(CC) -fPIC -DDYNAMIC_LIBRARY -o $@ -c $^ $(AM_CFLAGS)
+
+wfcvm_static.o: wfcvm.c
+	$(CC) -o $@ -c $^ $(AM_CFLAGS)
+
 
 install: all
 	mkdir -p ${prefix}

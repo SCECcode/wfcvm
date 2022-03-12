@@ -3,7 +3,7 @@ bin_PROGRAMS = unittest accepttest
 
 # General compiler/linker flags
 AM_CFLAGS = ${CFLAGS} -I../src
-AM_LDFLAGS = ${LDFLAGS} -L../src -lcvms -lm -gfortran
+AM_LDFLAGS = ${LDFLAGS} -L../src -lwfcvm -lm -gfortran
 
 TARGETS = unittest accepttest
 
