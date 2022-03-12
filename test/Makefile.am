@@ -7,13 +7,30 @@ AM_LDFLAGS = ${LDFLAGS} -L../src -lwfcvm -lm -gfortran
 
 TARGETS = unittest accepttest
 
+# Dist sources
+unittest_SOURCES = *.c *.h
+accepttest_SOURCES = *.c *.h
+
+.PHONY = run_unit run_accept
+
 all: $(bin_PROGRAMS)
+
+############################################
+# Executables
+############################################
+
 
 accepttest: unittest.o unittest_defs.o test_helper.o
 	$(CC) -o $@ $^ $(AM_CFLAGS)
+
+run_accept: accepttest
+	./run_accept
 	
 unittest: accepttest.o unittest_defs.o test_helper.o test_grid.o
 	$(CC) -o $@ $^ $(AM_CFLAGS)  
+
+run_unit: unittest
+	./run_unit
 	
 clean:
 	rm -rf *.o accepttest unittest
