@@ -32,7 +32,7 @@ int run_wfcvm_txt(const char *cvmdir, const char *infile, const char *outfile)
 {
   char currentdir[128];
 
-  printf("Running cmd: wfcvm_txt %s %s\n", infile, outfile);
+//  printf("Running cmd: wfcvm_txt %s %s\n", infile, outfile);
 
   /* Save current directory */
   getcwd(currentdir, 128);

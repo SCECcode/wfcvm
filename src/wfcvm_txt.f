@@ -4,7 +4,7 @@
       implicit none
       include 'in.h'
       integer :: kerr, i
-      write( 0, '(a)' ) 'Utah Geological Survey Community Velocity Model'
+c      write( 0, '(a)' ) 'Utah Geological Survey Community Velocity Model'
       read( *, * ) nn
       if ( nn > ibig ) then
          print *, 'Error: nn greater than ibig', nn, ibig
@@ -30,7 +30,7 @@
         if(rho(i)/=rho(i).or.alpha(i)/=alpha(i).or.beta(i)/=beta(i))
      $    write( 0, * ) 'Error: NaN', i, rlon(i), rlat(i), rdep(i)
         rl = rlon(i)
-        write( *, '(f10.5,1x,f8.5,1x,f9.2,1x,f8.1,1x,f8.1,1x,f8.1)' )
+        write( *, '(f8.5,1x,f10.5,1x,f9.2,1x,f8.1,1x,f8.1,1x,f8.1)' )
      $    rlon(i), rlat(i), rdep(i), alpha(i), beta(i), rho(i)
       end do
       kerr = 0

@@ -14,7 +14,7 @@ all: $(bin_PROGRAMS) $(lib_LIBRARIES) libwfcvm.so
 wfcvm: wf_cvm3d.f
 	${FC} ${FFLAGS} $^ -o $@
 
-wfcvm_txt: wfcvm_main.f wfcvm_sub_local.f wfcvm_txt.f
+wfcvm_txt: wfcvm_main.f wfcvm_sub.f wfcvm_txt.f
 	$(FC) $(AM_FCFLAGS) $^ -o $@
 
 libwfcvm.a: wfcvm_sub.o wfcvm_static.o

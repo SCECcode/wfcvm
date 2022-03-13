@@ -6,17 +6,29 @@ c
          include 'in.h'
 
          character(128) modelpath
+         character(128) str1
+         character(128) datapath
 
-         modelpath= TRIM('.')//achar(0)
+         icount = iargc()
+         if ( icount.eq.1 ) then
+           call getarg(0, str1)
+           call getarg(1, datapath)
+           modelpath= TRIM(datapath)//achar(0)
+         else
+           modelpath= TRIM('.')//achar(0)
+         endif
+
+c        write(0,*)'modelpath ',modelpath
+
          ecode = 0
 
 c--display version-------------------------------------
-         call wfcvm_version(version, ecode)
-         if(ecode.ne.0)then
-            write(*,*)' error retrieving version '
-            goto 98
-         endif
-         write( 0, * )'SCEC WFCVM ',version
+c         call wfcvm_version(version, ecode)
+c         if(ecode.ne.0)then
+c            write(*,*)' error retrieving version '
+c            goto 98
+c         endif
+c         write( 0, * )'SCEC WFCVM ',version
 
 c--read points of interest file-------------------------
          call readpts(kerr)
