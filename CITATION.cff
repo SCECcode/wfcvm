@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "SCEC SCEC"
+  given-names: ""
+keywords: UCVM, research
+license: BSD-3-Clause
+repository-code: "https://github.com/SCECcode/wfcvm.git"
+title: "Wasatch Front Communit Velocity Model (wfcvm)"
+version: 1.0
+type: software
+date-released: 2022-03-31
+version: 2.0
+repository-code: "https://github.com/SCECcode/wfcvm.git"
+contact:
+  - email: software@scec.org
+    name: "The SCEC Software project wfcvm"
+references:
+  - authors:
+      - family-names: "Mistrale"
+        given-names: "H."
+      - family-names: "Day"
+        given-names: "S."
+      - family-names: "Clayton"
+        given-names: "R."
+      - family-names: "Graves"
+        given-names: "R."
+    keywords: CVM, UCVM, velocity models, tomography, web
+    scope: "Cite this paper if you want to reference the model"
+    title: "The SCEC Southern California reference 3D seismic velocity model version 2"
+    journal: "Bulletin of the Seismological Society of America"
+    year: 2000
+    volume: 90
+    issue: 6B
+    start: S65
+    end: S76
+    doi: https://doi.org/10.1785/0120000510
