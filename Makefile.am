@@ -2,8 +2,6 @@
 
 SUBDIRS = data src test
 
-INCLUDES = $(default_includes)
-
 .PHONY = run_api run_unit run_accept
 
 run_api:

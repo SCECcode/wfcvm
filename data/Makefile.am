@@ -6,8 +6,8 @@ AM_FCFLAGS = ${FCFLAGS}
 AM_LDFLAGS = ${LDFLAGS}
 
 install:
-        mkdir -p ${prefix}/data
-        cp ./config ${prefix}/data
-        cp -R s ${prefix}/data
+	mkdir -p ${prefix}/data
+	cp ./config ${prefix}/data
+	cp -R s ${prefix}/data
 
 

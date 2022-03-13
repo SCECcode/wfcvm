@@ -52,7 +52,7 @@ int wfcvm_init(const char *dir, const char *label) {
   char modeldir[WFCVM_FORTRAN_MODELDIR_LEN];
 
   if (wfcvm_is_initialized) {
-    fprintf(stderr, "Model %s is already initialized\n", conf->label);
+    fprintf(stderr, "Model %s is already initialized\n", label);
     return(UCVM_CODE_ERROR);
   }
 
@@ -176,8 +176,6 @@ int wfcvm_finalize()
  * @return Zero
  */
 int wfcvm_version(char *ver, int len) {
-
-{
   int errcode;
   /* Fortran fixed string length */
   char verstr[WFCVM_FORTRAN_VERSION_LEN];
@@ -200,6 +198,7 @@ int wfcvm_version(char *ver, int len) {
 int wfcvm_setparam(int id, int param, ...) {
 
   va_list ap;
+  int zmode;
 
   va_start(ap, param);
   switch (param) {
@@ -246,7 +245,7 @@ int wfcvm_query(wfcvm_point_t *pnt, wfcvm_properties_t *data, int numpoints) {
   }
 
   nn = 0;
-  for (i = 0; i < n; i++) {
+  for (i = 0; i < numpoints; i++) {
 
       //depth = data[i].depth + data[i].shift_cr;
       depth = pnt[i].depth;

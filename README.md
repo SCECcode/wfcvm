@@ -5,7 +5,7 @@ WFCVM README
 $ aclocal
 $ autoconf
 $ automake
-$ ./configure --prefix=/dir/to/install
+$ ./configure --prefix=$UCVM_INSTALL_PATH/model/wfcvm
 $ make
 $ make install
 

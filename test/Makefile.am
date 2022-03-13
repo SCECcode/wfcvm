@@ -20,14 +20,16 @@ all: $(bin_PROGRAMS)
 ############################################
 
 
-accepttest: unittest.o unittest_defs.o test_helper.o
-	$(CC) -o $@ $^ $(AM_CFLAGS)
+accepttest: unittest.o unittest_defs.o test_helper.o \
+	test_grid.o
+	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
 run_accept: accepttest
 	./run_accept
 	
-unittest: accepttest.o unittest_defs.o test_helper.o test_grid.o
-	$(CC) -o $@ $^ $(AM_CFLAGS)  
+unittest: accepttest.o unittest_defs.o test_helper.o \
+	test_wfcvm_exec.o
+	$(CC) -o $@ $^ $(AM_LDFLAGS)  
 
 run_unit: unittest
 	./run_unit
