@@ -13,9 +13,9 @@
 #include <unistd.h>
 #include <assert.h>
 
+#include "wfcvm.h"
 #include "unittest_defs.h"
 #include "test_helper.h"
-#include "ucvm_model_dtypes.h"
 
 int WFCVM_TESTS=5;
 
@@ -98,22 +98,20 @@ int test_query_by_depth()
       return(1);
   }
 
-  if ((test_assert_double(ret.vs, 1569.190063), 0) != 0) {
-      return(1);
-  }
-  if ((test_assert_double(ret.vp, 3180.260498), 0) != 0) {
-      return(1);
-  }
-  if ((test_assert_double(ret.vp, 3180.260498), 0) != 0) {
-      return(1);
-  }
-  // printf("Query was successful.\n");
-
   // Close the model.
   assert(model_finalize() == 0);
 
-  printf("PASS\n");
-  return(0);
+//fprintf(stderr, "%lf %lf %lf\n", ret.vs, ret.vp, ret.rho);
+
+  if ( test_assert_double(ret.vs, 2325.000000) ||
+       test_assert_double(ret.vp, 4045.500000) ||
+       test_assert_double(ret.rho, 2503.784424) ) {
+     printf("FAIL\n");
+     return(1);
+     } else {
+       printf("PASS\n");
+       return(0);
+  }
 }
 
 int test_query_by_elevation()
@@ -149,22 +147,20 @@ int test_query_by_elevation()
       return(1);
   }
 
-  if ((test_assert_double(ret.vs, 1569.190063), 0) != 0) {
-      return(1);
-  }
-  if ((test_assert_double(ret.vp, 3180.260498), 0) != 0) {
-      return(1);
-  }
-  if ((test_assert_double(ret.vp, 3180.260498), 0) != 0) {
-      return(1);
-  }
-  //printf("Query was successful.\n");
-
   // Close the model.
   assert(model_finalize() == 0);
 
-  printf("PASS\n");
-  return(0);
+//fprintf(stderr, "%lf %lf %lf\n", ret.vs, ret.vp, ret.rho);
+
+  if ( test_assert_double(ret.vs, 2332.643799) ||
+       test_assert_double(ret.vp, 4058.800049) ||
+       test_assert_double(ret.rho, 2505.884521)) {
+     printf("FAIL\n");
+     return(1);
+     } else {
+       printf("PASS\n");
+       return(0);
+  }
 }
 
 // using points 'offset' by ucvm's digital elevation
@@ -240,21 +236,21 @@ int test_query_points_by_elevation()
   fclose(infp);
   fclose(outfp);
 
-  /* Perform diff btw outfile and ref */
-  if (test_assert_file(outfile, reffile) != 0) {
-    printf("unmatched result\n");
-    printf("%s\n",outfile);
-    printf("%s\n",reffile);
-    return(1);
-  }
-
   // Close the model.
   assert(model_finalize() == 0);
 
-  unlink(outfile);
-
-  printf("PASS\n");
-  return(0);
+  /* Perform diff btw outfile and ref */
+  if (test_assert_file(outfile, reffile) != 0) {
+    printf("unmatched result\n");
+    printf("outfile:%s\n",outfile);
+    printf("reffile:%s\n",reffile);
+    printf("FAIL\n");
+    return(1);
+    } else {
+      unlink(outfile);
+      printf("PASS\n");
+      return(0);
+  }
 }
 
 

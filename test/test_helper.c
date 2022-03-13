@@ -7,6 +7,25 @@
 #include "unittest_defs.h"
 #include "test_helper.h"
 
+int test_assert_file_exist(const char* filename)
+{
+  FILE *fp;
+
+  fp = fopen(filename, "r");
+  if (fp == NULL) {
+    fclose(fp);
+    return(1);
+  }
+  return(0);
+}
+
+double get_preset_ucvm_surface(double y, double x) {
+   if(y == -118.1 && x == 34.0) {
+      return 55.827;
+   }
+   return 0;
+}
+
 
 /* Execute wfcvm_txt as a child process */
 int run_wfcvm_txt(const char *cvmdir, const char *infile, const char *outfile)

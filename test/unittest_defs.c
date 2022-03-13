@@ -10,7 +10,7 @@
 int test_assert_int(int val1, int val2)
 {
   if (val1 != val2) {
-    fprintf(stderr, "FAIL: assertion %d != %d\n", val1, val2);
+    fprintf(stderr, "ERROR: assertion %d != %d\n", val1, val2);
     return(1);
   }
   return(0);
@@ -19,7 +19,7 @@ int test_assert_int(int val1, int val2)
 int test_assert_float(float val1, float val2)
 {
   if (abs(val1 - val2) > 0.01) {
-    fprintf(stderr, "FAIL: assertion %f != %f\n", val1, val2);
+    fprintf(stderr, "ERROR: assertion %f != %f\n", val1, val2);
     return(1);
   }
   return(0);
@@ -28,7 +28,7 @@ int test_assert_float(float val1, float val2)
 int test_assert_double(double val1, double val2)
 {
   if (abs(val1 - val2) > 0.01) {
-    fprintf(stderr, "FAIL: assertion %lf != %lf\n", val1, val2);
+    fprintf(stderr, "ERROR: assertion %lf != %lf\n", val1, val2);
     return(1);
   }
   return(0);
@@ -43,7 +43,7 @@ int test_assert_file(const char *file1, const char *file2)
   fp1 = fopen(file1, "r");
   fp2 = fopen(file2, "r");
   if ((fp1 == NULL) || (fp2 == NULL)) {
-    printf("FAIL: unable to open %s and/or %s\n", file1, file2);
+    printf("ERROR: unable to open %s and/or %s\n", file1, file2);
     return(1);
   }
   while ((!feof(fp1)) && (!feof(fp2))) {
@@ -56,7 +56,7 @@ int test_assert_file(const char *file1, const char *file2)
     }
   }
   if ((!feof(fp1)) || (!feof(fp2))) {
-    printf("FAIL: %s and %s are of unequal length\n", file1, file2);
+    printf("ERROR: %s and %s are of unequal length\n", file1, file2);
     return(1);
   }
 
@@ -79,11 +79,13 @@ int test_run_suite(suite_t *suite)
   struct timeval start, end;
 
   int i;
+  int bad_cnt=0;
 
   for (i = 0; i < suite->num_tests; i++) {
     gettimeofday(&start,NULL);
     if ((suite->tests[i].test_func)() != 0) {
       suite->tests[i].result = 1;
+      bad_cnt++;
     } else {
       suite->tests[i].result = 0;
     }
