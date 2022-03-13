@@ -1,0 +1,49 @@
+name: wfcvm-ci
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  wfcvm-build-standalone-mac:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: set UCVM_SRC_PATH 
+      run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/ucvm" >> $GITHUB_ENV
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/target" >> $GITHUB_ENV
+    - name: checkout wfcvm dev
+      uses: actions/checkout@v2
+      with: 
+        ref: main
+    - name: build wfcvm 
+      run: ./.github/scripts/wfcvm-build.sh 
+      shell: bash
+    - name: test wfcvm standalone
+      run: ./.github/scripts/wfcvm-test.sh
+      shell: bash
+
+  wfcvm-build-standalone-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: set UCVM_SRC_PATH 
+      run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/ucvm" >> $GITHUB_ENV
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/target" >> $GITHUB_ENV
+    - name: checkout wfcvm dev
+      uses: actions/checkout@v2
+      with: 
+        ref: dev
+    - name: build wfcvm
+      run: ./.github/scripts/wfcvm-build.sh
+      shell: bash
+    - name: test wfcvm standalone
+      run: ./.github/scripts/wfcvm-test.sh
+      shell: bash
+
