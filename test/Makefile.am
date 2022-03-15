@@ -29,7 +29,7 @@ run_accept: accepttest
 	./run_accept
 	
 unittest: unittest.o unittest_defs.o test_helper.o \
-	test_wfcvm_exec.o
+	test_wfcvm_exec.o test_vx_wfcvm_exec.o
 	$(CC) -g -o $@ $^ $(AM_LDFLAGS)  
 
 run_unit: unittest

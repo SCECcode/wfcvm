@@ -1,10 +1,10 @@
 # Autoconf/Automake binaries and headers
 lib_LIBRARIES = libwfcvm.a
-bin_PROGRAMS = wfcvm_txt wfcvm
+bin_PROGRAMS = vx_wfcvm wfcvm_txt wfcvm
 
 # General compiler/linker flags
 AM_CFLAGS = ${CFLAGS} -fPIC 
-AM_LDFLAGS = ${LDFLAGS}
+AM_LDFLAGS = ${LDFLAGS} -lm -lgfortran
 AM_FCFLAGS = ${FCFLAGS} -fPIC
 
 TARGETS = wfcvm wfcvm_txt libwfcvm.a libwfcvm.so

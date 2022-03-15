@@ -5,6 +5,7 @@
 #include "unittest_defs.h"
 
 #include "test_wfcvm_exec.h"
+#include "test_vx_wfcvm_exec.h"
 
 
 int main (int argc, char *argv[])
@@ -18,8 +19,9 @@ int main (int argc, char *argv[])
   }
 
   /* Run test suites */
+//  suite_wfcvm_exec(xmldir);
+  suite_vx_wfcvm_exec(xmldir);
   suite_wfcvm_exec(xmldir);
-
 
   return 0;
 }

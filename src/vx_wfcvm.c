@@ -9,12 +9,13 @@
  *
  */
 
+#include <getopt.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
 #include "wfcvm.h"
 
-extern int wfcvm_debug;
+int wfcvm_debug=0;
 
 int _compare_double(double f1, double f2) {
   double precision = 0.00001;
@@ -29,10 +30,10 @@ int _compare_double(double f1, double f2) {
 void usage() {
   printf("     vx_wfcvm - (c) SCEC\n");
   printf("Extract velocities from a WFCVM\n");
-  printf("\tusage: vx_wfcvm [-d] [-z dep/elev] < file.in\n\n");
+  printf("\tusage: vx_wfcvm [-d][-h] < file.in\n\n");
   printf("Flags:\n");
   printf("\t-d enable debug/verbose mode\n\n");
-  printf("\t-z directs use of dep/elev for Z column (default is dep).\n\n");
+  printf("\t-h usage\n\n");
   printf("Output format is:\n");
   printf("\tvp vs rho\n\n");
   exit (0);
@@ -54,14 +55,16 @@ int main(int argc, char* const argv[]) {
 	// Declare the structures.
 	wfcvm_point_t pt;
 	wfcvm_properties_t ret;
-        int zmode=UCVM_COORD_GEO_DEPTH;
         int rc;
         int opt;
 
 
         /* Parse options */
-        while ((opt = getopt(argc, argv, "h")) != -1) {
+        while ((opt = getopt(argc, argv, "dh")) != -1) {
           switch (opt) {
+          case 'd':
+            wfcvm_debug=1;
+            break;
           case 'h':
             usage();
             exit(0);
