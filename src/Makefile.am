@@ -11,6 +11,9 @@ TARGETS = wfcvm wfcvm_txt libwfcvm.a libwfcvm.so
 
 all: $(bin_PROGRAMS) $(lib_LIBRARIES) libwfcvm.so
 
+vx_wfcvm : vx_wfcvm.o libwfcvm.a
+	$(CC) -o $@ $^ $(AM_LDFLAGS)
+
 wfcvm: wf_cvm3d.f
 	${FC} ${FFLAGS} $^ -o $@
 
