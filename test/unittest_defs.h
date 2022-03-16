@@ -8,6 +8,12 @@
 #define True 1
 #define False 0
 
+/* Location of binaries */
+#define BIN_DIR "../src"
+
+/* Location of model files */
+#define MODEL_DIR "../data/3d"
+
 #define MAX_TEST_NAME 32
 
 /* Test  datatype */

@@ -3,8 +3,8 @@
 # Process options
 FLAGS=""
 
-# Pass along any arguments to vx_cvmhlabn
-while getopts 'ghz:' OPTION
+# Pass along any arguments to vx_wfcvm
+while getopts 'dh' OPTION
 do
   if [ "$OPTARG" != "" ]; then
       FLAGS="${FLAGS} -$OPTION $OPTARG"
@@ -23,9 +23,15 @@ fi
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 IN_FILE=$1
 OUT_FILE=$2
+OO=$3
 
-echo "${SCRIPT_DIR}/vx_cvmhlabn ${FLAGS} < ${IN_FILE} > ${OUT_FILE}" >> run.log
-${SCRIPT_DIR}/vx_cvmhlabn ${FLAGS} < ${IN_FILE} > ${OUT_FILE}
+#echo "vvvv"
+#echo $IN_FILE
+#echo $OUT_FILE
+#echo $OO
+#echo "^^^^"
+
+${SCRIPT_DIR}/vx_wfcvm ${FLAGS} < ${IN_FILE} > ${OUT_FILE}
 
 if [ $? -ne 0 ]; then
     exit 1

@@ -7,6 +7,8 @@
 #include "unittest_defs.h"
 #include "test_helper.h"
 
+int debug_mode =0;
+
 int test_assert_file_exist(const char* filename)
 {
   FILE *fp;
@@ -68,3 +70,54 @@ int run_wfcvm_txt(const char *cvmdir, const char *infile, const char *outfile)
 
   return(0);
 }
+
+int runVXWFCVM(const char *bindir, const char *cvmdir, 
+	  const char *infile, const char *outfile)
+{
+  char currentdir[1280];
+  char runpath[1280];
+  char flags[1280];
+
+  sprintf(runpath, "%s/run_vx_wfcvm.sh", bindir);
+
+  if(debug_mode) { strcat(flags, "-d "); }
+
+  /* Save current directory */
+  getcwd(currentdir, 1280);
+  
+  /* Fork process */
+  pid_t pid;
+  pid = fork();
+  if (pid == -1) {
+    perror("fork");
+    return(1);
+  } else if (pid == 0) {
+    /* Change dir to cvmdir */
+    if (chdir(bindir) != 0) {
+      printf("FAIL: Error changing dir in run_vx_cvmhlabn.sh\n");
+      return(1);
+    }
+
+    if (strlen(flags) == 0) {
+      execl(runpath, runpath, infile, outfile, (char *)0);
+    } else {
+      execl(runpath, runpath, flags, infile, outfile, (char *)0);
+    }
+
+    perror("execl"); /* shall never get to here */
+    printf("FAIL: CVM exited abnormally\n");
+    return(1);
+  } else {
+    int status;
+    waitpid(pid, &status, 0);
+    if (WIFEXITED(status)) {
+      return(0);
+    } else {
+      printf("FAIL: CVM exited abnormally\n");
+      return(1);
+    }
+  }
+
+  return(0);
+}
+
