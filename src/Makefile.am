@@ -5,8 +5,8 @@ bin_PROGRAMS = vx_wfcvm wfcvm_txt wfcvm
 # General compiler/linker flags
 AM_CFLAGS = ${CFLAGS} -fPIC 
 AM_LDFLAGS = ${LDFLAGS} -lm -lgfortran
-AM_FCFLAGS = ${FCFLAGS} -fPIC
-#AM_FCFLAGS = -fcheck=all -Wall -g -fbacktrace ${FCFLAGS} -fPIC
+#AM_FCFLAGS = ${FCFLAGS} -fPIC
+AM_FCFLAGS = -fcheck=all -Wall -g3 -fbacktrace ${FCFLAGS} -fPIC
 
 TARGETS = wfcvm wfcvm_txt libwfcvm.a libwfcvm.so
 
@@ -48,4 +48,4 @@ install: all
 	find ./* -maxdepth 0 ! -name 'libwfcvm.*' ! -name '*.h' ! -name 'test*' ! -name 'wfcvm' ! -name '*.f' ! -name '*.o' ! -name 'Makefile*' ! -exec cp '{}' '${prefix}/src' \;
 
 clean:
-	rm -rf *.o *~ wfcvm_txt *.a
+	rm -rf *.o *~ vx_cvms wfcvm_txt cvms_bin cvms_mpi *.a

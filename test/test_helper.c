@@ -94,7 +94,7 @@ int runVXWFCVM(const char *bindir, const char *cvmdir,
   } else if (pid == 0) {
     /* Change dir to cvmdir */
     if (chdir(bindir) != 0) {
-      printf("FAIL: Error changing dir in run_vx_cvmhlabn.sh\n");
+      printf("FAIL: Error changing dir in run_vx_wfcvm.sh\n");
       return(1);
     }
 

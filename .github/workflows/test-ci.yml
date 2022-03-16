@@ -5,16 +5,16 @@ on:
     branches: [ foo ]
 
 jobs:
-  cvmhlabn-test-mac:
+  wfcvm-test-mac:
     runs-on: macos-latest
     strategy:
       matrix:
         python-version: [3.7]
     steps:
     - name: set UCVM_SRC_PATH 
-      run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/cvmhlabn/ucvm" >> $GITHUB_ENV
+      run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/wfcvm/ucvm" >> $GITHUB_ENV
     - name: set UCVM_INSTALL_PATH 
-      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhlabn/target" >> $GITHUB_ENV
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/wfcvm/target" >> $GITHUB_ENV
 #    - name: Start SSH via Ngrok
 #      if: ${{ success() }}
 #      uses: luchihoratiu/debug-via-ssh@main
@@ -30,17 +30,17 @@ jobs:
         ref: basin
         path: ucvm
     - id: look-around
-      run: ( echo " cvmhlabn-ucvm-ci:pwd =>";pwd;
-             echo " cvmhlabn-ucvm-ci:UCVM_SRC_PATH =>"$UCVM_SRC_PATH;
-             echo " cvmhlabn-ucvm-ci:UCVM_INSTALL_PATH =>"$UCVM_INSTALL_PATH;
-             echo " cvmhlabn-ucvm-ci:RUNNER_WORKSPACE =>"$RUNNER_WORKSPACE;
-             echo " cvmhlabn-ucvm-ci:github.action_path =>"${{ github.action_path }};)
+      run: ( echo " wfcvm-ucvm-ci:pwd =>";pwd;
+             echo " wfcvm-ucvm-ci:UCVM_SRC_PATH =>"$UCVM_SRC_PATH;
+             echo " wfcvm-ucvm-ci:UCVM_INSTALL_PATH =>"$UCVM_INSTALL_PATH;
+             echo " wfcvm-ucvm-ci:RUNNER_WORKSPACE =>"$RUNNER_WORKSPACE;
+             echo " wfcvm-ucvm-ci:github.action_path =>"${{ github.action_path }};)
       shell: bash
     - id: build-ucvm
       uses: SCECcode/UCVM/.github/actions/build-action@v1
       with:
-         initiating-repo: 'cvmhlabn'
-         target-model: 'cvmhlabn'
+         initiating-repo: 'wfcvm'
+         target-model: 'wfcvm'
     - name: Start SSH via Ngrok when ucvm-test.sh fails
       if: ${{ failure() }}
       uses: luchihoratiu/debug-via-ssh@main
