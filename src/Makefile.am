@@ -4,8 +4,9 @@ bin_PROGRAMS = wfcvm_txt wfcvm
 
 # General compiler/linker flags
 AM_CFLAGS = ${CFLAGS} -fPIC 
-AM_LDFLAGS = ${LDFLAGS}
+AM_LDFLAGS = ${LDFLAGS} -lgfortran
 AM_FCFLAGS = ${FCFLAGS} -fPIC
+#AM_FCFLAGS = -fcheck=all -Wall -g -fbacktrace ${FCFLAGS} -fPIC
 
 TARGETS = wfcvm wfcvm_txt libwfcvm.a libwfcvm.so
 

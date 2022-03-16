@@ -47,7 +47,8 @@ float *wfcvm_rho = NULL;
 int wfcvm_init(const char *dir, const char *label) {
 
   char configbuf[512];
-  int errcode;
+  int errcode=0;
+
   /* Fortran fixed string length */
   char modeldir[WFCVM_FORTRAN_MODELDIR_LEN];
 
@@ -78,7 +79,7 @@ int wfcvm_init(const char *dir, const char *label) {
 
   sprintf(modeldir, "%s/model/%s/data/%s/", dir, label, wfcvm_configuration->model_dir);
 
-  wfcvm_init_(modeldir, &errcode);
+  wfcvm_init_(modeldir, &errcode,WFCVM_FORTRAN_MODELDIR_LEN);
   if (errcode != 0) {
     fprintf(stderr, "Failed to init WFCVM\n");
     return(UCVM_CODE_ERROR);
@@ -180,7 +181,7 @@ int wfcvm_version(char *ver, int len) {
   /* Fortran fixed string length */
   char verstr[WFCVM_FORTRAN_VERSION_LEN];
 
-  wfcvm_version_(verstr, &errcode);
+  wfcvm_version_(verstr, &errcode,WFCVM_FORTRAN_VERSION_LEN);
   if (errcode != 0) {
     fprintf(stderr, "Failed to retrieve version from WFCVM\n");
     return(UCVM_CODE_ERROR);

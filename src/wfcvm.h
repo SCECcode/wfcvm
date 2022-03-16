@@ -94,10 +94,10 @@ void wfcvm_print_error(char *err);
 
 // Fortran forward delcaration
 /* Initializer. Modeldir buffer must be 128 bytes in size */
-void wfcvm_init_(char *modeldir, int *errcode);
+void wfcvm_init_(char *modeldir, int *errcode, int);
 
 /* Get version ID. Version string buffer must be 64 bytes in size */
-void wfcvm_version_(char *ver, int *errcode);
+void wfcvm_version_(char *ver, int *errcode, int);
 
 /* Query WFCVM */
 void wfcvm_query_(int *nn,
