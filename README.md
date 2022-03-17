@@ -1,7 +1,22 @@
-# WFCVM(wfcvm)
+# The Wasatch Front Community Velocity Model (WFCVM)
+
+<a href="https://github.com/sceccode/wfcvm.git"><img src="https://github.com/sceccode/wfcvm/wiki/images/ucvm_logo.png"></a>
+
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/wfcvm)
+[![wfcvm-ci Actions Status](https://github.com/SCECcode/ucvm/workflows/wfcvm-ci/badge.svg)](https://github.com/SCECcode/wfcvm/actions)
+[![wfcvm-ucvm-ci Actions Status](https://github.com/SCECcode/ucvm/workflows/wfcvm-wfcvm-ci/badge.svg)](https://github.com/SCECcode/wfcvm/actions)
+
+## Description
 
 Wasatch Front Community Velocity Model. Currently,the model includes Cache, 
 Weber/Davis, Salt Lake, and Utah basin.
+
+## Table of Content
+1. [Software Documentation](https://github.com/SCECcode/wfcvm/wiki)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [License](#license)
 
 ## Installation
 
@@ -19,15 +34,21 @@ $ make
 $ make install
 </pre>
 
-#### ASCII query interface wfcvm_txt
+## Usage
 
-Accepts points from stdin with format (lat, lon, dep (m)) and 
+### ucvm
+
+As part of ucvm installation, use 'wfcvm' as the model selection.
+
+### wfcvm_txt
+
+ASCII query interface accepts points from stdin with format (lat, lon, dep (m)) and 
 writes data material properties to std out with format (lat, lon, dep, 
 vp, vs, density).
 
-#### Binary query interface wfcm_bin ???
+#### wfcm_bin
 
-Read a configuration file named 'cvm-input' with the following 
+Binary query interface reads a configuration file named 'cvm-input' with the following 
 items:
 
 <pre>
