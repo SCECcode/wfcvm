@@ -38,7 +38,7 @@ $ make install
 
 ### UCVM
 
-As part of UCVM(https://github.com/SCECcode/ucvm) installation, use 'wfcvm' as the model.
+As part of [UCVM](https://github.com/SCECcode/ucvm) installation, use 'wfcvm' as the model.
 
 ### wfcvm_txt
 
