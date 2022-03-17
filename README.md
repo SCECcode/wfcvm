@@ -1,4 +1,4 @@
-# The Wasatch Front Community Velocity Model (WFCVM)
+# The Wasatch Front Community Velocity Model (wfcvm)
 
 <a href="https://github.com/sceccode/wfcvm.git"><img src="https://github.com/sceccode/wfcvm/wiki/images/wfcvm_logo.png"></a>
 
@@ -16,14 +16,16 @@ Weber/Davis, Salt Lake, and Utah basin.
 1. [Software Documentation](https://github.com/SCECcode/wfcvm/wiki)
 2. [Installation](#installation)
 3. [Usage](#usage)
-4. [License](#license)
+4. [Contributing](#contributing)
+5. [Credits](#credit)
+6. [License](#license)
 
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
 version 19.4.0 or higher. 
 
-This package can also be installed standalone
+This package can also be build as a standalone program
 
 <pre>
 $ aclocal
@@ -46,7 +48,7 @@ ASCII query interface accepts points from stdin with format (lat, lon, dep (m)) 
 writes data material properties to std out with format (lat, lon, dep, 
 vp, vs, density).
 
-#### wfcm_bin
+### wfcm_bin
 
 Binary query interface reads a configuration file named 'cvm-input' with the following 
 items:
@@ -63,6 +65,21 @@ line 7: path to output vs file
 
 The input and output files are in binary (float) format, with each
 containing the number of points specified on line 1. 
+
+## Support
+Support for WFCVM is provided by the Southern California Earthquake Center
+(SCEC) Research Computing Group.  Users can report issues and feature requests
+using WFCVM's github-based issue tracking link below. Developers will also
+respond to emails sent to the SCEC software contact listed below.
+1. [WFCVM Github Issue Tracker](https://github.com/SCECcode/wfcvm/issues)
+2. Email Contact: software@scec.usc.edu
+
+## Credits
+* Utah
+* etc
+
+## Contributing
+We welcome contributions to the WFCVM, please contact us at software@scec.usc.edu.
 
 ## License
 This software is distributed under the BSD 3-Clause open-source license.
