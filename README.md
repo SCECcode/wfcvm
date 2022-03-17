@@ -1,11 +1,11 @@
 # The Wasatch Front Community Velocity Model (WFCVM)
 
-<a href="https://github.com/sceccode/wfcvm.git"><img src="https://github.com/sceccode/wfcvm/wiki/images/ucvm_logo.png"></a>
+<a href="https://github.com/sceccode/wfcvm.git"><img src="https://github.com/sceccode/wfcvm/wiki/images/wfcvm_logo.png"></a>
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/wfcvm)
-[![wfcvm-ci Actions Status](https://github.com/SCECcode/ucvm/workflows/wfcvm-ci/badge.svg)](https://github.com/SCECcode/wfcvm/actions)
-[![wfcvm-ucvm-ci Actions Status](https://github.com/SCECcode/ucvm/workflows/wfcvm-wfcvm-ci/badge.svg)](https://github.com/SCECcode/wfcvm/actions)
+[![wfcvm-ci Actions Status](https://github.com/SCECcode/wfcvm/workflows/wfcvm-ci/badge.svg)](https://github.com/SCECcode/wfcvm/actions)
+[![wfcvm-wfcvm-ci Actions Status](https://github.com/SCECcode/wfcvm/workflows/wfcvm-wfcvm-ci/badge.svg)](https://github.com/SCECcode/wfcvm/actions)
 
 ## Description
 
@@ -36,9 +36,9 @@ $ make install
 
 ## Usage
 
-### ucvm
+### UCVM
 
-As part of ucvm installation, use 'wfcvm' as the model selection.
+As part of UCVM(https://github.com/SCECcode/ucvm) installation, use 'wfcvm' as the model.
 
 ### wfcvm_txt
 
