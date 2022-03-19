@@ -5,15 +5,15 @@ bin_PROGRAMS = vx_wfcvm wfcvm_txt wfcvm
 # General compiler/linker flags
 AM_CFLAGS = ${CFLAGS} -fPIC 
 AM_LDFLAGS = ${LDFLAGS} -lm -lgfortran
-#AM_FCFLAGS = ${FCFLAGS} -fPIC
-AM_FCFLAGS = -fcheck=all -Wall -g3 -fbacktrace ${FCFLAGS} -fPIC
+AM_FCFLAGS = ${FCFLAGS} -fPIC
+#AM_FCFLAGS = -fcheck=all -Wall -g3 -fbacktrace ${FCFLAGS} -fPIC
 
 TARGETS = wfcvm wfcvm_txt libwfcvm.a libwfcvm.so
 
 all: $(bin_PROGRAMS) $(lib_LIBRARIES) libwfcvm.so
 
 vx_wfcvm : vx_wfcvm.o libwfcvm.a
-	$(CC) -o $@ $^ $(AM_LDFLAGS)
+	$(FC) -o $@ $^ $(AM_LDFLAGS)
 
 wfcvm: wf_cvm3d.f
 	${FC} ${FFLAGS} $^ -o $@
