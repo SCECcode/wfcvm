@@ -21,16 +21,16 @@ jobs:
         ref: dev
     - name: check environment
       run: (echo $RUNNER_WORKSPACE; echo $UCVM_INSTALL_PATH)
+    - name: build wfcvm 
+      run: ./.github/scripts/wfcvm-build.sh 
+      shell: bash
     - name: Start SSH via Ngrok
-      if: ${{ success() }}
+      if: ${{ failure() }}
       uses: luchihoratiu/debug-via-ssh@main
       with:
             NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
             NGROK_TIMEOUT: 3000
             SSH_PASS: ${{ secrets.NGROK_SECRET }}
-    - name: build wfcvm 
-      run: ./.github/scripts/wfcvm-build.sh 
-      shell: bash
     - name: test wfcvm standalone
       run: ./.github/scripts/wfcvm-test.sh
       shell: bash
