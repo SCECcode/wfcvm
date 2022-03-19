@@ -19,6 +19,8 @@ jobs:
       uses: actions/checkout@v2
       with: 
         ref: dev
+    - name: check environment
+      run: (echo $RUNNER_WORKSPACE; echo $UCVM_INSTALL_PATH)
     - name: Start SSH via Ngrok
       if: ${{ success() }}
       uses: luchihoratiu/debug-via-ssh@main
