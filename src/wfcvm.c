@@ -237,7 +237,6 @@ int wfcvm_query(wfcvm_point_t *pnt, wfcvm_properties_t *data, int numpoints) {
   int i, j;
   int nn = 0;
   double depth;
-  int datagap = 0;
   int errcode = 0;
 
   if (wfcvm_buf_init == 0) {
@@ -275,7 +274,7 @@ int wfcvm_query(wfcvm_point_t *pnt, wfcvm_properties_t *data, int numpoints) {
           nn = 0;
         }
         } else {
-          datagap = 1;
+          // skip the ones that has negative depth
       }
   }
 
@@ -289,10 +288,6 @@ int wfcvm_query(wfcvm_point_t *pnt, wfcvm_properties_t *data, int numpoints) {
         data[wfcvm_index[j]].rho = (double)wfcvm_rho[j];
       }
     }
-  }
-
-  if (datagap) {
-    return(UCVM_CODE_DATAGAP);
   }
 
   return(UCVM_CODE_SUCCESS);

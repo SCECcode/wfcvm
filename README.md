@@ -12,7 +12,7 @@
 Wasatch Front Community Velocity Model. Currently,the model includes Cache, 
 Weber/Davis, Salt Lake, and Utah basin.
 
-## Table of Content
+## Table of Contents
 1. [Software Documentation](https://github.com/SCECcode/wfcvm/wiki)
 2. [Installation](#installation)
 3. [Usage](#usage)
