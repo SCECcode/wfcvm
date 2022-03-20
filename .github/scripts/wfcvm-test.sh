@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## tested under ucvm/ucvm_env.sh
+
 cd test
 
 make run_unit | tee result_unit.txt
