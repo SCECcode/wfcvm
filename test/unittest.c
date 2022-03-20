@@ -19,7 +19,6 @@ int main (int argc, char *argv[])
   }
 
   /* Run test suites */
-//  suite_wfcvm_exec(xmldir);
   suite_vx_wfcvm_exec(xmldir);
   suite_wfcvm_exec(xmldir);
 

@@ -23,13 +23,6 @@ fi
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 IN_FILE=$1
 OUT_FILE=$2
-OO=$3
-
-#echo "vvvv"
-#echo $IN_FILE
-#echo $OUT_FILE
-#echo $OO
-#echo "^^^^"
 
 ${SCRIPT_DIR}/vx_wfcvm ${FLAGS} < ${IN_FILE} > ${OUT_FILE}
 
