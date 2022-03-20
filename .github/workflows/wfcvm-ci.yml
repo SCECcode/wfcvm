@@ -32,7 +32,7 @@ jobs:
 #            NGROK_TIMEOUT: 3000
 #            SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: test wfcvm standalone
-      run: ./.github/scripts/wfcvm-test.sh
+      run: ./.github/scripts/wfcvm-test-standalone.sh
       shell: bash
 
   wfcvm-build-standalone-linux:
@@ -53,13 +53,13 @@ jobs:
       run: ./.github/scripts/wfcvm-build.sh
       shell: bash
     - name: test wfcvm standalone
-      run: ./.github/scripts/wfcvm-test.sh
+      run: ./.github/scripts/wfcvm-test-standalone.sh
       shell: bash
-    - name: Start SSH via Ngrok
-      if: ${{ success() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+#    - name: Start SSH via Ngrok
+#      if: ${{ success() }}
+#      uses: luchihoratiu/debug-via-ssh@main
+#      with:
+#            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#            NGROK_TIMEOUT: 3000
+#            SSH_PASS: ${{ secrets.NGROK_SECRET }}
 
