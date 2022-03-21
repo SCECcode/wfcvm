@@ -23,7 +23,7 @@ jobs:
         ref: basin
         path: ucvm
     - id: build-ucvm
-      uses: ./ucvm/.github/actions/build-action
+      uses: ./ucvm/.github/actions/build-ucvm-action
       with:
          initiating-repo: 'wfcvm'
          target-model: 'wfcvm'
@@ -81,7 +81,7 @@ jobs:
         ref: basin
         path: ucvm
     - id: build-ucvm
-      uses: ./ucvm/.github/actions/build-action
+      uses: ./ucvm/.github/actions/build-ucvm-action
       with:
          initiating-repo: 'wfcvm'
          target-model: 'wfcvm'
