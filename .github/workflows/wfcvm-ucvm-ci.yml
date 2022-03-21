@@ -7,6 +7,7 @@ on:
 jobs:
   wfcvm-build-ucvm-mac:
     runs-on: macos-latest
+    using: "composite"
     strategy:
       matrix:
         python-version: [3.7]
@@ -17,7 +18,6 @@ jobs:
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/wfcvm/target" >> $GITHUB_ENV
 ### build ucvm(basin) first 
     - id: build-ucvm 
-      using: "composite"
       uses: actions/checkout@v2
       with: 
         repository: 'SCECcode/UCVM'
@@ -66,6 +66,7 @@ jobs:
 
   wfcvm-build-ucvm-linux:
     runs-on: ubuntu-latest
+    using: composite
     strategy:
       matrix:
         python-version: [3.7]
@@ -76,7 +77,6 @@ jobs:
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/wfcvm/target" >> $GITHUB_ENV
 ### build ucvm(basin) first 
     - id: build-ucvm 
-      using: composite
       uses: actions/checkout@v2
       with: 
         repository: 'SCECcode/UCVM'
