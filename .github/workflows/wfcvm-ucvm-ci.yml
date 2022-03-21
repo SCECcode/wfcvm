@@ -23,7 +23,7 @@ jobs:
         repository: 'SCECcode/UCVM'
         ref: basin
         path: ucvm
-      uses: SCECcode/UCVM/.github/actions/build-action@v2
+      uses: actions/build-action@v2
       with:
         repository: 'SCECcode/UCVM'
         initiating-repo: 'wfcvm'
