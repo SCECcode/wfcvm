@@ -75,8 +75,10 @@ respond to emails sent to the SCEC software contact listed below.
 2. Email Contact: software@scec.usc.edu
 
 ## Credits
-* Utah
-* etc
+* Utah Geological Survey
+* Harold Magistrale
+* K.B. Olsen
+* J.C. Pechmann
 
 ## Contributing
 We welcome contributions to the WFCVM, please contact us at software@scec.usc.edu.

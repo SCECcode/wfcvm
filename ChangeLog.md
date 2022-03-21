@@ -1,4 +1,4 @@
-May 2021:
+## May 2021  Mei-Hui Su <mei@usc.edu>
 
-  Reactivate WFCVM 
-
+* Reactivate WFCVM 
+* Update with newer model data from Utah Geological Survey
