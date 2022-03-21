@@ -7,7 +7,6 @@ on:
 jobs:
   wfcvm-build-ucvm-mac:
     runs-on: macos-latest
-    using: "composite"
     strategy:
       matrix:
         python-version: [3.7]
@@ -17,17 +16,17 @@ jobs:
     - name: set UCVM_INSTALL_PATH 
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/wfcvm/target" >> $GITHUB_ENV
 ### build ucvm(basin) first 
-    - id: build-ucvm 
+    - id: get-ucvm 
       uses: actions/checkout@v2
       with: 
         repository: 'SCECcode/UCVM'
         ref: basin
         path: ucvm
-      uses: actions/build-action@v2
+    - id: build-ucvm
+      uses: ucvm/.github/actions/build-action
       with:
-        repository: 'SCECcode/UCVM'
-        initiating-repo: 'wfcvm'
-        target-model: 'wfcvm'
+         initiating-repo: 'wfcvm'
+         target-model: 'wfcvm'
     - id: get-result
       run: more ${{ steps.build-ucvm.outputs.build-log }}
       shell: bash
@@ -66,7 +65,6 @@ jobs:
 
   wfcvm-build-ucvm-linux:
     runs-on: ubuntu-latest
-    using: composite
     strategy:
       matrix:
         python-version: [3.7]
@@ -76,17 +74,17 @@ jobs:
     - name: set UCVM_INSTALL_PATH 
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/wfcvm/target" >> $GITHUB_ENV
 ### build ucvm(basin) first 
-    - id: build-ucvm 
+    - id: get-ucvm 
       uses: actions/checkout@v2
       with: 
         repository: 'SCECcode/UCVM'
         ref: basin
         path: ucvm
-      uses: actions/build-action@v2
+    - id: build-ucvm
+      uses: ucvm/.github/actions/build-action
       with:
-        repository: 'SCECcode/UCVM'
-        initiating-repo: 'wfcvm'
-        target-model: 'wfcvm'
+         initiating-repo: 'wfcvm'
+         target-model: 'wfcvm'
     - id: get-result
       run: more ${{ steps.build-ucvm.outputs.build-log }}
       shell: bash
