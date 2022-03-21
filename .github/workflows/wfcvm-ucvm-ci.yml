@@ -75,17 +75,18 @@ jobs:
     - name: set UCVM_INSTALL_PATH 
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/wfcvm/target" >> $GITHUB_ENV
 ### build ucvm(basin) first 
-    - id: get-ucvm 
+    - id: build-ucvm 
+      using: composite
       uses: actions/checkout@v2
       with: 
         repository: 'SCECcode/UCVM'
         ref: basin
         path: ucvm
-    - id: build-ucvm
-      uses: SCECcode/UCVM/.github/actions/build-action
+      uses: actions/build-action@v2
       with:
-         initiating-repo: 'wfcvm'
-         target-model: 'wfcvm'
+        repository: 'SCECcode/UCVM'
+        initiating-repo: 'wfcvm'
+        target-model: 'wfcvm'
     - id: get-result
       run: more ${{ steps.build-ucvm.outputs.build-log }}
       shell: bash
