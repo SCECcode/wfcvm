@@ -24,6 +24,9 @@
 /* Maximum number of points to query */
 #define WFCVM_MAX_POINTS 1000000
 
+/* config string */
+#define WFCVM_CONFIG_MAX 1000
+
 // Structures
 /** Defines a point (latitude, longitude, and depth) in WGS84 format */
 typedef struct wfcvm_point_t {
@@ -67,6 +70,8 @@ int model_init(const char *dir, const char *label);
 int model_finalize();
 /** Returns version information */
 int model_version(char *ver, int len);
+/** Returns config information */
+int model_config(char **config, int *sz);
 /** Queries the model */
 int model_query(wfcvm_point_t *points, wfcvm_properties_t *data, int numpts);
 /** Setparam */
@@ -82,6 +87,8 @@ int wfcvm_init(const char *dir, const char *label);
 int wfcvm_finalize();
 /** Returns version information */
 int wfcvm_version(char *ver, int len);
+/** Returns config information */
+int wfcvm_config(char **ver, int *sz);
 /** Queries the model */
 int wfcvm_query(wfcvm_point_t *points, wfcvm_properties_t *data, int numpts);
 /** Setparam*/

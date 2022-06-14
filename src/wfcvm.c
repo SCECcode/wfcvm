@@ -52,6 +52,11 @@ int wfcvm_init(const char *dir, const char *label) {
   /* Fortran fixed string length */
   char modeldir[WFCVM_FORTRAN_MODELDIR_LEN];
 
+  wfcvm_config_string = calloc(WFCVM_CONFIG_MAX, sizeof(char));
+  wfcvm_config_string[0]='\0';
+  wfcvm_config_sz=0;
+
+
   if (wfcvm_is_initialized) {
     fprintf(stderr, "Model %s is already initialized\n", label);
     return(UCVM_CODE_ERROR);
@@ -96,6 +101,10 @@ int wfcvm_init(const char *dir, const char *label) {
     wfcvm_rho = malloc(WFCVM_MAX_POINTS*sizeof(float));
     wfcvm_buf_init = 1;
   }
+
+  /* setup config_string */
+  sprintf(wfcvm_config_string,"config = %s\n",configbuf);
+  wfcvm_config_sz=1;
 
   wfcvm_is_initialized = 1;
 
@@ -164,6 +173,7 @@ int wfcvm_finalize()
     free(wfcvm_rho);
     wfcvm_buf_init = 0;
   }
+  if(wfcvm_config_string) free(wfcvm_config_string);
   wfcvm_is_initialized = 0;
   return(UCVM_CODE_SUCCESS);
 }
@@ -190,6 +200,25 @@ int wfcvm_version(char *ver, int len) {
   strncpy(ver, verstr, len);
   return(UCVM_CODE_SUCCESS);
 }
+
+/**
+ * Returns the model config information.
+ *
+ * @param key Config key string to return.
+ * @param sz Number of config term to return.
+ * @return Zero
+ */
+int wfcvm_config(char **config, int *sz)
+{
+  int len=strlen(wfcvm_config_string);
+  if(len > 0) {
+    *config=wfcvm_config_string;
+    *sz=wfcvm_config_sz;
+    return UCVM_CODE_SUCCESS;
+  }
+  return UCVM_CODE_ERROR;
+}
+
 
 /**
  * setparam WFCVM
@@ -378,6 +407,9 @@ int (*get_model_finalize())() {
 }
 int (*get_model_version())(char *, int) {
          return &wfcvm_version;
+}
+int (*get_model_config())(char **, int *) {
+         return &wfcvm_config;
 }
 int (*get_model_setparam())(int, int, ...) {
          return &wfcvm_setparam;
