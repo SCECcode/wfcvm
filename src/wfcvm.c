@@ -17,6 +17,10 @@
 /* Maximum number of points to query */
 #define WFCVM_MAX_POINTS 1000000
 
+/** The config of the model */
+char *wfcvm_config_string;
+int wfcvm_config_sz=0;
+
 /* Init flag */
 int wfcvm_is_initialized = 0;
 
