@@ -2,7 +2,7 @@ name: wfcvm-ci
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
 
 jobs:
   wfcvm-build-standalone-mac:
@@ -15,10 +15,10 @@ jobs:
       run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/ucvm" >> $GITHUB_ENV
     - name: set UCVM_INSTALL_PATH 
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/target" >> $GITHUB_ENV
-    - name: checkout wfcvm dev
+    - name: checkout wfcvm main
       uses: actions/checkout@v2
       with: 
-        ref: dev
+        ref: main
     - name: check environment
       run: (echo $RUNNER_WORKSPACE; echo $UCVM_INSTALL_PATH)
     - name: build wfcvm 
@@ -45,10 +45,10 @@ jobs:
       run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/ucvm" >> $GITHUB_ENV
     - name: set UCVM_INSTALL_PATH 
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/target" >> $GITHUB_ENV
-    - name: checkout wfcvm dev
+    - name: checkout wfcvm main
       uses: actions/checkout@v2
       with: 
-        ref: dev
+        ref: main 
     - name: build wfcvm
       run: ./.github/scripts/wfcvm-build.sh
       shell: bash
