@@ -3,7 +3,7 @@
 
 AC_INIT(wfcvm,2.0)
 AC_CONFIG_SRCDIR([src/wfcvm.h])
-AM_INIT_AUTOMAKE()
+AM_INIT_AUTOMAKE([foreign no-exeext])
 AC_PROG_RANLIB
 
 # Checks for libraries.
@@ -39,5 +39,5 @@ AC_FUNC_MALLOC
 AC_CHECK_FUNCS([memset])
 
 AC_CONFIG_FILES([Makefile src/Makefile
-                 test/Makefile])
+                 data/Makefile test/Makefile])
 AC_OUTPUT

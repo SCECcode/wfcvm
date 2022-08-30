@@ -1,7 +1,6 @@
 #ifndef WFCVM_H
 #define WFCVM_H
 
-
 /* Initializer */
 void wfcvm_init_(char *modeldir, int *errcode);
 

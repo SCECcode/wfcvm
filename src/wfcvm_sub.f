@@ -1,3 +1,4 @@
+c MHS TWEAK to turn fname from 2021/05/15/bas6.xyz to modeldir/base6xyz
 c WFCVM init
 c--
          subroutine wfcvm_init(modeldir, ecode)
@@ -433,13 +434,14 @@ c PES 2011/07/21
          common/filestuff/rpath,fname,loc1
 
          include 'surface.h'
-         character*8 aname, asuf*4
+         character*4 asuf
          include 'names.h'
          asuf='.xyz'
          kerr=0
 c---loop to read-------------------
          do 117 i=1,numsur
-          fname=rpath(1:loc1)//'/'//aedname(i)//asuf
+         fname=rpath(1:loc1)//'/'//aedname(i)//asuf
+
           open(16,file=fname,status='old',err=99)
            do 118 k=1,nlasur(i)
            do 118 j=1,nlosur(i)

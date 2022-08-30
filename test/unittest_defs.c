@@ -79,11 +79,13 @@ int test_run_suite(suite_t *suite)
   struct timeval start, end;
 
   int i;
+  int bad_cnt=0;
 
   for (i = 0; i < suite->num_tests; i++) {
     gettimeofday(&start,NULL);
     if ((suite->tests[i].test_func)() != 0) {
       suite->tests[i].result = 1;
+      bad_cnt++;
     } else {
       suite->tests[i].result = 0;
     }

@@ -8,7 +8,7 @@
 #include <getopt.h>
 #include "unittest_defs.h"
 #include "test_helper.h"
-#include "test_grid.h"
+#include "test_grid_exec.h"
 
 
 int test_wfcvm_txt()
@@ -23,9 +23,9 @@ int test_wfcvm_txt()
   /* Save current directory */
   getcwd(currentdir, 128);
 
-  sprintf(infile, "%s/%s", currentdir, "test-grid.in");
+  sprintf(infile, "%s/inputs/%s", currentdir, "test-grid.in");
   sprintf(outfile, "%s/%s", currentdir, "test-grid.out");
-  sprintf(reffile, "%s/%s", currentdir, "test-extract.ref");
+  sprintf(reffile, "%s/ref/%s", currentdir, "test-grid-extract.ref");
 
   if (test_assert_int(run_wfcvm_txt("../src", infile, outfile), 0) != 0) {
     printf("wfcvm_txt failure\n");

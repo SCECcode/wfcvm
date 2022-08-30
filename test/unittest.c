@@ -4,6 +4,9 @@
 #include <getopt.h>
 #include "unittest_defs.h"
 
+#include "test_wfcvm_exec.h"
+#include "test_vx_wfcvm_exec.h"
+
 
 int main (int argc, char *argv[])
 {
@@ -16,7 +19,8 @@ int main (int argc, char *argv[])
   }
 
   /* Run test suites */
-  fprintf(stderr, "No unit tests currently defined\n");
+  suite_vx_wfcvm_exec(xmldir);
+  suite_wfcvm_exec(xmldir);
 
   return 0;
 }
