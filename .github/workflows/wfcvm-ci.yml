@@ -2,7 +2,7 @@ name: wfcvm-ci
 
 on:
   push:
-    branches: [ main ]
+    branches: [ foo ]
 
 jobs:
   wfcvm-build-standalone-mac:
