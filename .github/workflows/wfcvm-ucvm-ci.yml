@@ -88,6 +88,14 @@ jobs:
         repository: 'SCECcode/UCVM'
         ref: main 
         path: ucvm
+   - name: Start SSH via Ngrok
+     if: ${{ success() }}
+     uses: luchihoratiu/debug-via-ssh@main
+     with:
+           NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+           NGROK_TIMEOUT: 3000
+           SSH_PASS: ${{ secrets.NGROK_SECRET }}
+    - name: test wfcvm under ucvm
     - id: build-ucvm
       uses: ./ucvm/.github/actions/build-ucvm-action
       with:
