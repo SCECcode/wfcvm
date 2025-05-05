@@ -28,13 +28,6 @@ jobs:
          initiating-repo: 'wfcvm'
          target-model: 'wfcvm'
          target-branch: 'testMei'
-#    - name: Start SSH via Ngrok
-#      if: ${{ failure() }}
-#      uses: luchihoratiu/debug-via-ssh@main
-#      with:
-#            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-#            NGROK_TIMEOUT: 3000
-#            SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - id: get-result
       run: more ${{ steps.build-ucvm.outputs.build-log }}
       shell: bash
@@ -88,10 +81,10 @@ jobs:
         repository: 'SCECcode/UCVM'
         ref: main 
         path: ucvm
-   - name: Start SSH via Ngrok
-     if: ${{ success() }}
-     uses: luchihoratiu/debug-via-ssh@main
-     with:
+    - name: Start SSH via Ngrok
+      if: ${{ success() }}
+      uses: luchihoratiu/debug-via-ssh@main
+      with:
            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
            NGROK_TIMEOUT: 3000
            SSH_PASS: ${{ secrets.NGROK_SECRET }}
