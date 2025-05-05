@@ -94,15 +94,11 @@ jobs:
          initiating-repo: 'wfcvm'
          target-model: 'wfcvm'
          target-branch: 'testMei'
-    - name: Start SSH via Ngrok
-      if: ${{ success() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - id: get-result
       run: more ${{ steps.build-ucvm.outputs.build-log }}
+      shell: bash
+    - id: show-branch
+      run: git log
       shell: bash
     - name: move stock wfcvm away
       run: (rm -rf $RUNNER_WORKSPACE/wfcvm/ucvm/work/model/wfcvm)
