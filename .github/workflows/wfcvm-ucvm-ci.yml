@@ -97,9 +97,6 @@ jobs:
     - id: get-result
       run: more ${{ steps.build-ucvm.outputs.build-log }}
       shell: bash
-    - id: show-branch
-      run: git log
-      shell: bash
     - name: move stock wfcvm away
       run: (rm -rf $RUNNER_WORKSPACE/wfcvm/ucvm/work/model/wfcvm)
       shell: bash
