@@ -125,13 +125,13 @@ jobs:
     - name: test wfcvm with ucvm
       run: (cd $RUNNER_WORKSPACE/wfcvm/ucvm/work/model/wfcvm; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/wfcvm-test-ucvm.sh)
       shell: bash
-    - name: Start SSH via Ngrok
-      if: ${{ success() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+#   - name: Start SSH via Ngrok
+#     if: ${{ success() }}
+#     uses: luchihoratiu/debug-via-ssh@main
+#     with:
+#           NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#           NGROK_TIMEOUT: 3000
+#           SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: test wfcvm under ucvm
       run: (cd $RUNNER_WORKSPACE/wfcvm/ucvm; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/ucvm-test.sh)
       shell: bash
