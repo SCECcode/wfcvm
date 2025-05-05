@@ -91,7 +91,7 @@ jobs:
     - id: build-ucvm
       uses: ./ucvm/.github/actions/build-ucvm-action
       with:
-         initiating-repo: 'wfcvm'
+         initiating-repo: 'wfcvm-git'
          target-model: 'wfcvm'
          target-branch: 'testMei'
     - id: get-result
