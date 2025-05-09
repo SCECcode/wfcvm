@@ -29,7 +29,7 @@ jobs:
          target-model: 'wfcvm'
          target-branch: 'testMei'
     - id: get-result
-      run: more ${{ steps.build-ucvm.outputs.build-log }}
+      run: more ${{ steps.build-ucvm-action.outputs.build-log }}
       shell: bash
     - name: move stock wfcvm away
       run: (rm -rf $RUNNER_WORKSPACE/wfcvm/ucvm/work/model/wfcvm)
