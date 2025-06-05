@@ -1,4 +1,4 @@
-# The Wasatch Front Community Velocity Model (wfcvm)
+# Wasatch Front Community Velocity Model (WFCVM)
 
 <a href="https://github.com/sceccode/wfcvm.git"><img src="https://github.com/sceccode/wfcvm/wiki/images/wfcvm_logo.png"></a>
 
@@ -6,13 +6,22 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/wfcvm)
 [![wfcvm-ucvm-ci Actions Status](https://github.com/SCECcode/wfcvm/workflows/wfcvm-ucvm-ci/badge.svg)](https://github.com/SCECcode/wfcvm/actions)
 
-Wasatch Front Community Velocity Model. Currently,the model includes Cache, 
-Weber/Davis, Salt Lake, and Utah basin.
+Wasatch Front Community Velocity Model
+
+This model includes Cache, Weber/Davis, Salt Lake, and Utah basins.
 
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
-version 25.x or higher. 
+version 25.7 or higher. 
+
+## Library
+
+The library ./lib/libwfcvm.a may be statically linked into any
+user application. Also, if your system supports dynamic linking,
+you will also have a ./lib/libwfcvm.so file that can be used
+for dynamic linking. The header file defining the API is located
+in ./include/wfcvm.h.
 
 ## Contact the authors
 
