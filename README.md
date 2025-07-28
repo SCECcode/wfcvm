@@ -10,6 +10,10 @@ Wasatch Front Community Velocity Model
 
 This model includes Cache, Weber/Davis, Salt Lake, and Utah basins.
 
+The Wasatch Front CVM consists of detailed, rule-based representations of the major populated sediment-filled basins, embedded in a 3D crust, over a variable depth Moho, over upper mantle velocities. The basins are parameterized as a set of objects and rules implemented in a computer code that generates seismic velocities and density at any desired point. The objects are stratigraphic surfaces constructed from geological, geophysical, and geotechnical data, and the rule is Faust’s relation Vp = k(da)1/6 where Vp is P-wave velocity, d is the maximum depth of burial of the sediments, a is the sediment age, and k is a constant. Age at any point in a basin can be interpolated from the surfaces. The constant k is calibrated for each surface by comparison to well sonic logs and seismic refraction surveys. Density is derived from Vp using a standard relation; density is used to find Poisson's ratio and Vs is calculated from the Vp and Poisson's ratio. The shallow basin velocities are directly constrained by geotechnical borehole logs and detailed surface site response unit mapping based on surface geology and Vs30 measurements.
+
+Magistrale, H, Olsen, KB, Pechmann, JC (2008) Construction and verification of a Wasatch front community velocity model. Technical report no. HQGR.060012, 14 pp. Reston, VA: US Geological Survey
+
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
